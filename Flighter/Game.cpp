@@ -11,6 +11,7 @@ Game::Game()
 
 Game::~Game()
 {
+
 	delete myplane;
 	delete screen;
 }
