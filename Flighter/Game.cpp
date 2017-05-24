@@ -18,6 +18,7 @@ Game::~Game()
 void Game::Render()
 {
 	screen->render();
+
 }
 
 void Game::Clear()
