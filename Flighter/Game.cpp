@@ -1,6 +1,7 @@
 #include "Game.h"
 #include"MyPlane.h"
 #include"Enemy.h"
+
 Game::Game()
 {
 	screen = new Screen;
