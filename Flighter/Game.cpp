@@ -45,17 +45,22 @@ void Game::Update()
 	myplane->setPos();
 
 	if(KEYDOWN(VK_LBUTTON))
-		GenerateBullet();
+		generateMYBullet();
+	generateEMBullet();
 	myplane->render();
 
-	//(*bullet.begin())->update();
 	updatebullet();
 }
 
-void Game::GenerateBullet()
+void Game::generateMYBullet()
 {
 	//TODO: Enermy 
 	bullet.push_back(new Bullet(myplane->PosX-2 , myplane->PosY, ME));
+}
+
+void Game::generateEMBullet()
+{
+	//TODO;
 }
 
 

@@ -15,6 +15,8 @@ class Game
 	Screen* screen;
 
 	void updatebullet();
+	void generateMYBullet();
+	void generateEMBullet();
 
 public:
 	Game();
@@ -23,7 +25,7 @@ public:
 	void Render();
 	void Clear();
 	void Update();
-	void GenerateBullet();
+	
 
 	friend class Enemy;
 	friend class MyPlane;

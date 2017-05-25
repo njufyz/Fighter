@@ -31,11 +31,16 @@ void MyPlane::setPos()
 {
 	POINT point;
 	GetCursorPos(&point);
-	HWND hWnd = GetConsoleWindow();
 	ScreenToClient(hWnd, &point);    // 将鼠标指针位置转换为窗口坐标
 
 	PosX = point.y >> 4;
 	PosY = point.x >> 3;
+
+	if (PosX >= ScreenHeight)	PosX = ScreenHeight - 1;
+	if (PosX <= 0)						PosX = 1;
+	if (PosY >= ScreenWidth)   PosY = ScreenWidth - 1;
+	if (PosY <= 0)						PosY = 0;
+	
 }
 	
 
