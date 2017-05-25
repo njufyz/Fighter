@@ -24,9 +24,9 @@ int main()
 		s.render();
 		*/
 		game.Clear();
-		game.update();
+		game.Update();
 		game.Render();
-		Sleep(100);
+		Sleep(30);
 	}
 	
 }

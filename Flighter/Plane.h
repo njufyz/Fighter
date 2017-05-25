@@ -14,6 +14,7 @@ protected:
 public:
 	Plane() {}
 	Plane(float x, float y, float hp);
+	void setPos();
 	virtual void render() = 0;
 
 	friend class Game;

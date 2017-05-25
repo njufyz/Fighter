@@ -27,8 +27,9 @@ void Game::Clear()
 	screen->clear();
 }
 
-void Game::update()
+void Game::Update()
 {
+	myplane->setPos();
 	myplane->render();
 }
 
