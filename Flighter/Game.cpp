@@ -1,18 +1,18 @@
+#include"Windows.h"
 #include "Game.h"
 #include"MyPlane.h"
 #include"Enemy.h"
 
 void Game::updatebullet()
 {
-	for (auto i = bullet.begin(); i != bullet.end(); i++)
+	for (auto i = bullet.begin(); i != bullet.end(); )
 	{
 		(*i)->update();
 		if ((*i)->isout())
 		{
-			auto j = i;
-			i++;
-			bullet.erase(j);
+			bullet.erase(i++);
 		}
+		else i++;
 	}
 }
 
@@ -43,7 +43,9 @@ void Game::Clear()
 void Game::Update()
 {
 	myplane->setPos();
-	GenerateBullet();
+
+	if(KEYDOWN(VK_LBUTTON))
+		GenerateBullet();
 	myplane->render();
 
 	//(*bullet.begin())->update();

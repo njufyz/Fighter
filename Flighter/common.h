@@ -12,6 +12,8 @@
 #define ME -1
 #define EM 1
 
+#define KEYDOWN(vk_code) ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
+
 
 class Game;
 class Screen;
