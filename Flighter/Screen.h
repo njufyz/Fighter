@@ -1,9 +1,11 @@
 #pragma once
+#include <Windows.h>
 #include"common.h"
 
 class Screen
 {
 	char screen[ScreenHeight][ScreenWidth];
+	HANDLE hOut;
 
 public:
 	Screen();

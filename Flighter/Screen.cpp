@@ -12,6 +12,13 @@ inline bool isInScr(int x, int y)
 Screen::Screen()
 {
 	memset(screen, ' ', BattleHeight * BattleWidth);
+
+	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO CursorInfo;
+	GetConsoleCursorInfo(hOut, &CursorInfo);	//获取控制台光标信息  
+	CursorInfo.bVisible = false;								//隐藏控制台光标  
+	SetConsoleCursorInfo(hOut, &CursorInfo);	//设置控制台光标状态
+
 }
 
 void Screen::clear()
@@ -22,13 +29,7 @@ void Screen::clear()
 
 void Screen::render()
 {
-	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-
-	CONSOLE_CURSOR_INFO CursorInfo;
-	GetConsoleCursorInfo(hOut, &CursorInfo);//获取控制台光标信息  
-	CursorInfo.bVisible = false; //隐藏控制台光标  
-	SetConsoleCursorInfo(hOut, &CursorInfo);//设置控制台光标状态
-
+	
 	for (int i = 0; i<ScreenHeight; i++)
 	{
 		for (int j = 0; j < ScreenWidth; j++)
@@ -42,7 +43,6 @@ void Screen::render()
 				printf("%c", screen[i][j]);
 			}
 		}
-
 	}
 }
 

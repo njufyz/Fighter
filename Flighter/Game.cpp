@@ -32,7 +32,6 @@ Game::~Game()
 void Game::Render()
 {
 	screen->render();
-
 }
 
 void Game::Clear()
@@ -42,25 +41,38 @@ void Game::Clear()
 
 void Game::Update()
 {
+	//更新飞机位置
 	myplane->setPos();
+	
+	//让所有子弹飞一会
+	updatebullet();
 
+	//按下鼠标 我方飞机发射子弹
 	if(KEYDOWN(VK_LBUTTON))
 		generateMYBullet();
-	generateEMBullet();
+
+	//所有的敌机发射子弹
+	//generateEMBullet();
+
+	//TODO: 碰撞检测 & 敌机更新
+
+	//显示我方飞机
 	myplane->render();
 
-	updatebullet();
+	//TODO：显示enable的敌机
+
+	
 }
 
 void Game::generateMYBullet()
 {
-	//TODO: Enermy 
-	bullet.push_back(new Bullet(myplane->PosX-2 , myplane->PosY, ME));
+	bullet.push_back(new Bullet(myplane->PosX - planeSizeX , myplane->PosY, ME));
 }
 
 void Game::generateEMBullet()
 {
-	//TODO;
+	for (auto i = enemy.begin(); i != enemy.end(); i++)
+		bullet.push_back(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
 }
 
 
