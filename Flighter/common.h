@@ -9,6 +9,10 @@
 #define planeSizeX 2
 #define planeSizeY 3
 
+#define ME -1
+#define EM 1
+
+struct Bullet;
 class Game;
 class Screen;
 class Plane;
