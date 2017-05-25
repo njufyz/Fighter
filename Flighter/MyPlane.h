@@ -9,6 +9,7 @@ class MyPlane :
 		{ '.',	'|',		'.' },
 		{ '^',	'^',	'^' },
 	};
+
 public:
 	MyPlane() {}
 	MyPlane(float x, float y, float hp)
@@ -18,5 +19,6 @@ public:
 		HP = hp;
 	}
 	void render();
+	void setPos();
 };
 

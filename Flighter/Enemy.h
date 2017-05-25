@@ -4,6 +4,7 @@
 class Enemy :
 	public Plane
 {
+	bool enable;
 	char ImagePlaneEnemy[planeSizeX][planeSizeY] =
 	{
 		{ '#',	'#', 	'#' },
@@ -17,6 +18,7 @@ public:
 		PosX = x;
 		PosY = y;
 		HP = hp;
+		enable = 1;
 	}
 	void render();
 };

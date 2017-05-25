@@ -15,5 +15,6 @@ public:
 	friend class Game;
 	friend class Enemy;
 	friend class MyPlane;
+	friend class Bullet;
 };
 

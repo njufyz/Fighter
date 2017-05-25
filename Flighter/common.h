@@ -12,12 +12,13 @@
 #define ME -1
 #define EM 1
 
-struct Bullet;
+
 class Game;
 class Screen;
 class Plane;
 class MyPlane;
 class Enemy;
+class Bullet;
 
 
 

@@ -8,10 +8,12 @@ using namespace std;
 
 class Game
 {
-	Plane* myplane;
+	MyPlane* myplane;
 	list<Enemy*>enemy;
 	list<Bullet*> bullet;
 	Screen* screen;
+
+	void updatebullet();
 
 public:
 	Game();
@@ -20,10 +22,12 @@ public:
 	void Render();
 	void Clear();
 	void Update();
+	void GenerateBullet();
 
 	friend class Enemy;
 	friend class MyPlane;
-	friend class Srceen;
+	friend class Screen;
+	friend class Bullet;
 
 };
 
