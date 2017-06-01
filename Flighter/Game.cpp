@@ -7,8 +7,8 @@ void Game::updatebullet()
 {
 	for (auto i = bullet.begin(); i != bullet.end(); )
 	{
-		(*i)->move();
-		if ((*i)->isout())
+		(*i)->move();					//移动子弹
+		if ((*i)->isout())				//飞出去了
 		{
 			bullet.erase(i++);
 		}
@@ -20,8 +20,8 @@ void Game::updatenemy()
 {
 	for (auto i = enemy.begin(); i != enemy.end(); )
 	{
-		(*i)->move();
-		if ((*i)->isout())
+		(*i)->move();						//移动飞机
+		if ((*i)->isout())					//飞出去了
 		{
 			enemy.erase(i++);
 		}
@@ -31,24 +31,21 @@ void Game::updatenemy()
 
 void Game::render()
 {
-	myplane->render();
+	myplane->render();					//画我方飞机
 	for (auto i : enemy)
-		i->render();
+		i->render();							//画敌方飞机
 	for (auto i : bullet)
-		i->render();
+		i->render();							//画子弹
 }
 
 Game::Game()
 {
 	screen = new Screen;
-	myplane = new MyPlane(0.0, 0.0, 0.0);
+	myplane = new MyPlane(0.0, 0.0, 10.0);
 	for (int i = 0; i < 5; i++)
 	{
-		enemy.push_back(new Enemy(0.0, 25.0, 3.0, 1.0));
-		enemy.push_back(new Enemy(0.0, 5.0, 3.0, 1.0));
-		enemy.push_back(new Enemy(0.0, 40.0, 3.0, 1.0));
-		enemy.push_back(new Enemy(0.0, 67.0, 3.0, 1.0));
-		enemy.push_back(new Enemy(0.0, 56.0, 3.0, 1.0));
+		//先产生5架敌机
+		enemy.push_back(new Enemy(0.0, rand()%80, 3.0, 1.0));
 	}
 
 }
@@ -61,7 +58,7 @@ Game::~Game()
 
 void Game::Render()
 {
-	render();
+	//写入屏幕
 	screen->render();
 }
 
@@ -70,11 +67,14 @@ void Game::Clear()
 	screen->clear();
 }
 
+//更新战场
 void Game::Update()
 {
 	//更新飞机位置
 	myplane->setPos();
-	
+	//添加低级
+	generateEMplane();
+
 	//让所有子弹飞一会
 	updatebullet();
 	updatenemy();
@@ -88,22 +88,31 @@ void Game::Update()
 
 	//TODO: 碰撞检测 & 敌机更新
 
-	//显示我方飞机
+	//显示战场
 	render();
 
-	//TODO：显示enable的敌机
 	
 }
 
+//添加我方子弹
 void Game::generateMYBullet()
 {
 	bullet.push_back(new Bullet(myplane->PosX - planeSizeX , myplane->PosY, ME));
 }
 
+//添加敌机子弹
 void Game::generateEMBullet()
 {
 	for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
 		bullet.push_back(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
+}
+
+//产生地方飞机
+void Game::generateEMplane()
+{
+	if (game_time % 25 == 0)
+		//某一部分随机产生飞机，可能位于屏幕上方
+		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 1.0));
 }
 
 

@@ -19,6 +19,7 @@ class Game
 	void render();
 	void generateMYBullet();
 	void generateEMBullet();
+	void generateEMplane();
 
 public:
 	Game();

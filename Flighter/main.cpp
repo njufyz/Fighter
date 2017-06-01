@@ -11,12 +11,14 @@ int game_time= 0;
 int main()
 {
 	system("MODE con: COLS=80 LINES=40");
+	srand(time(0));
+
 	while (1)
 	{
 		game.Clear();
 		game.Update();
 		game.Render();
-		Sleep(30);
+		Sleep(60);
 		game_time++;
 	}
 	
