@@ -22,6 +22,6 @@ class MyPlane;
 class Enemy;
 class Bullet;
 
-
+extern int game_time;
 
 

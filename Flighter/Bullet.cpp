@@ -5,8 +5,13 @@
 
 void Bullet::render()
 {
-	if(enable)
-		game.screen->writechar('*',(int)x, (int)y);
+	if (enable)
+	{
+		if(type == ME)
+			game.screen->writechar('*', (int)x, (int)y);
+		else
+			game.screen->writechar('.', (int)x, (int)y);
+	}
 }
 
 void Bullet::setPos()
@@ -15,12 +20,6 @@ void Bullet::setPos()
 	y = game.myplane->PosY;
 }
 
-void Bullet::update()
-{
-//	setPos();
-	move();
-	render();
-}
 
 void Bullet::move()
 {

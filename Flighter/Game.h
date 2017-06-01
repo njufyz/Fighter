@@ -1,5 +1,5 @@
 #pragma once
-//#include<vector>
+
 #include<list>
 #include"Plane.h"
 #include"Screen.h"
@@ -15,6 +15,8 @@ class Game
 	Screen* screen;
 
 	void updatebullet();
+	void updatenemy();
+	void render();
 	void generateMYBullet();
 	void generateEMBullet();
 
@@ -26,7 +28,6 @@ public:
 	void Clear();
 	void Update();
 	
-
 	friend class Enemy;
 	friend class MyPlane;
 	friend class Screen;

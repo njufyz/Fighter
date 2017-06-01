@@ -13,13 +13,13 @@ public:
 		x = _x;
 		y = _y;
 		type = _type;
-		velocity = type * 1.0f;
+		velocity = type * 2.0f;
 		enable = 1;
 	}
 
 	void render();
 	void setPos();
-	void update();
+//	void update();
 	void move();
 	bool isout();
 };
