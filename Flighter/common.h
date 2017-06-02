@@ -24,4 +24,5 @@ class Bullet;
 
 extern int game_time;
 
+enum GAME_STAT{INIT, PLAY, DIE};
 

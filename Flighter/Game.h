@@ -16,10 +16,14 @@ class Game
 
 	void updatebullet();
 	void updatenemy();
+
 	void render();
+
 	void generateMYBullet();
 	void generateEMBullet();
 	void generateEMplane();
+
+	void collidewithmyplane();
 
 public:
 	Game();

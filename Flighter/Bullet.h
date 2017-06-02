@@ -22,4 +22,6 @@ public:
 //	void update();
 	void move();
 	bool isout();
+
+	friend class Game;
 };

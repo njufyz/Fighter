@@ -103,8 +103,11 @@ void Game::generateMYBullet()
 //添加敌机子弹
 void Game::generateEMBullet()
 {
-	for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
-		bullet.push_back(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
+	if (game_time % 5 == 0)
+	{
+		for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
+			bullet.push_back(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
+	}
 }
 
 //产生地方飞机
@@ -113,6 +116,22 @@ void Game::generateEMplane()
 	if (game_time % 25 == 0)
 		//某一部分随机产生飞机，可能位于屏幕上方
 		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 1.0));
+}
+
+void Game::collidewithmyplane()
+{
+	for (auto i : bullet)
+	{
+		if (i->type == EM)
+		{
+
+		}
+	}
+}
+
+void init()
+{
+
 }
 
 

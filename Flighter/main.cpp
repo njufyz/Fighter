@@ -7,19 +7,29 @@
 
 Game game;
 int game_time= 0;
+GAME_STAT game_stat = INIT;
 
 int main()
 {
 	system("MODE con: COLS=80 LINES=40");
+	//system("color af");
 	srand(time(0));
-
+	game_stat = PLAY;
 	while (1)
 	{
-		game.Clear();
-		game.Update();
-		game.Render();
-		Sleep(60);
-		game_time++;
+		switch (game_stat) {
+			case  PLAY:
+				game.Clear();
+				game.Update();
+				game.Render();
+				Sleep(60);
+				game_time++;
+				break;
+			case DIE:
+				system("cls");
+				break;
+		}
+		
 	}
 	
 }
