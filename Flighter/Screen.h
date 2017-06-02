@@ -12,7 +12,6 @@ public:
 	void clear();
 	void render();
 	void writechar(char c, int x, int y);
-	void writeplane(Plane* plane);
 
 	friend class Game;
 	friend class Enemy;

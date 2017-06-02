@@ -11,7 +11,7 @@ GAME_STAT game_stat = INIT;
 
 int main()
 {
-	system("MODE con: COLS=80 LINES=40");
+	system("MODE con: COLS=120 LINES=40");
 	//system("color af");
 	srand(time(0));
 	game_stat = PLAY;

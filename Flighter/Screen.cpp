@@ -6,12 +6,12 @@
 
 inline bool isInScr(int x, int y)
 {
-	return (x >= 0) && (x < ScreenHeight) && (y >= 0) && (y < ScreenWidth);
+	return (x >= 0) && (x < BattleHeight) && (y >= 0) && (y < BattleWidth);
 }
 
 Screen::Screen()
 {
-	memset(screen, ' ', BattleHeight * BattleWidth);
+	memset(screen, ' ', ScreenHeight * ScreenWidth);
 
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO CursorInfo;
@@ -24,7 +24,7 @@ Screen::Screen()
 void Screen::clear()
 {
 	system("cls");
-	memset(screen, ' ', BattleHeight * BattleWidth);
+	memset(screen, ' ', ScreenHeight * ScreenWidth);
 }
 
 void Screen::render()
@@ -50,12 +50,6 @@ void Screen::writechar(char c, int x, int y)
 {
 	if(isInScr(x, y))
 		screen[x][y] = c;
-//	else assert(0);
-}
-
-void Screen::writeplane(Plane * plane)
-{
-	plane->render();
 }
 
 

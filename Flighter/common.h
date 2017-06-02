@@ -1,6 +1,6 @@
 #pragma once
 
-#define ScreenWidth 80
+#define ScreenWidth 120
 #define ScreenHeight 40
 
 #define BattleWidth  80

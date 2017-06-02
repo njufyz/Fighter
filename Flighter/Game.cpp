@@ -50,7 +50,7 @@ Game::Game()
 	for (int i = 0; i < 5; i++)
 	{
 		//先产生5架敌机
-		enemy.push_back(new Enemy(0.0, rand()% BattleWidth, 2.0, 1.0));
+		enemy.push_back(new Enemy(0.0, rand()% BattleWidth, 1.0, 1.0));
 	}
 
 }
@@ -130,7 +130,7 @@ void Game::generateEMplane()
 {
 	if (game_time % 25 == 0)
 		//随机产生飞机，位于屏幕上方，从上向下飞向战场
-		enemy.push_back(new Enemy(rand()%10 - 10, rand() % BattleWidth, 3.0, 2.0));
+		enemy.push_back(new Enemy(rand()%10 - 10, rand() % BattleWidth, 1.0, 2.0));
 }
 
 
@@ -150,7 +150,7 @@ void Game::collide_with_myplane()
 				|| (x == posx) && (y == posy - 1)
 				|| (x == posx) && (y == posy)
 				|| (x == posx) && (y == posy + 1))
-
+				
 				myplane->HP--;				//血量减少
 
 			if (myplane->HP <= 0)
@@ -176,9 +176,9 @@ void Game::collide_with_enemy()
 					|| (x == posx) && (y == posy - 1)
 					|| (x == posx) && (y == posy)
 					|| (x == posx) && (y == posy + 1))
-
+					
 				{
-					(*j)->HP -=0.5;
+					(*j)->HP -=1;
 					if ((*j)->HP <=0)
 						enemy.erase(j++);						//飞机死掉
 					scores += 25;

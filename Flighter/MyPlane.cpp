@@ -17,13 +17,13 @@ void MyPlane::render()
 	int y = (int)PosY;
 
 	//TODO:
-	game.screen->writechar('^', x, y);
+	game.screen->writechar('=', x, y);
 	game.screen->writechar('|', x - 1, y);
 
-	game.screen->writechar('^', x, y + 1);
+	game.screen->writechar('<', x, y + 1);
 	game.screen->writechar('$', x - 1, y + 1);
 
-	game.screen->writechar('^', x, y - 1);
+	game.screen->writechar('>', x, y - 1);
 	game.screen->writechar('$', x - 1, y - 1);
 	
 }
@@ -36,9 +36,9 @@ void MyPlane::setPos()
 	PosX = point.y >> 4;
 	PosY = point.x >> 3;
 
-	if (PosX >= ScreenHeight)	PosX = ScreenHeight - 1;
+	if (PosX >= BattleHeight)	PosX = BattleHeight - 1;
 	if (PosX <= 0)						PosX = 1;
-	if (PosY >= ScreenWidth)   PosY = ScreenWidth - 1;
+	if (PosY >= BattleWidth)   PosY = BattleWidth - 1;
 	if (PosY <= 0)						PosY = 0;
 	
 }
