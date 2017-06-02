@@ -41,11 +41,11 @@ void Game::render()
 Game::Game()
 {
 	screen = new Screen;
-	myplane = new MyPlane(0.0, 0.0, 10.0);
+	myplane = new MyPlane(0.0, 0.0, 5.0);
 	for (int i = 0; i < 5; i++)
 	{
 		//先产生5架敌机
-		enemy.push_back(new Enemy(0.0, rand()%80, 3.0, 1.0));
+		enemy.push_back(new Enemy(0.0, rand()%80, 2.0, 1.0));
 	}
 
 }
@@ -56,12 +56,13 @@ Game::~Game()
 	delete screen;
 }
 
+//写入屏幕
 void Game::Render()
 {
-	//写入屏幕
 	screen->render();
 }
 
+//清空屏幕
 void Game::Clear()
 {
 	screen->clear();
@@ -72,7 +73,8 @@ void Game::Update()
 {
 	//更新飞机位置
 	myplane->setPos();
-	//添加低级
+
+	//添加敌机
 	generateEMplane();
 
 	//让所有子弹飞一会
@@ -87,11 +89,12 @@ void Game::Update()
 	generateEMBullet();
 
 	//TODO: 碰撞检测 & 敌机更新
+	collide_with_myplane();
+	collide_with_enemy();
 
 	//显示战场
 	render();
 
-	
 }
 
 //添加我方子弹
@@ -118,20 +121,60 @@ void Game::generateEMplane()
 		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 1.0));
 }
 
-void Game::collidewithmyplane()
+void Game::collide_with_myplane()
 {
 	for (auto i : bullet)
 	{
 		if (i->type == EM)
 		{
+			int x = i->x, y = i->y;
+			int posx = myplane->PosX, posy = myplane->PosY;
 
+			if ((x == posx - 1) && (y == posy - 1)
+				|| (x == posx - 1) && (y == posy)
+				|| (x == posx - 1) && (y == posy + 1)
+				|| (x == posx) && (y == posy - 1)
+				|| (x == posx) && (y == posy)
+				|| (x == posx) && (y == posy + 1))
+
+				myplane->HP--;
+			if (myplane->HP <= 0)
+				game_stat = DIE;
 		}
 	}
 }
 
-void init()
+void Game::collide_with_enemy()
 {
+	for (auto i : bullet)
+	{
+		if (i->type == ME)
+		{
+			for (auto j = enemy.begin(); j!=enemy.end();  )
+			{
+				int x = i->x, y = i->y;
+				int posx = (*j)->PosX, posy = (*j)->PosY;
 
+				if ((x == posx + 1) && (y == posy - 1)
+					|| (x == posx + 1) && (y == posy)
+					|| (x == posx + 1) && (y == posy + 1)
+					|| (x == posx) && (y == posy - 1)
+					|| (x == posx) && (y == posy)
+					|| (x == posx) && (y == posy + 1))
+
+					enemy.erase(j++);
+				
+				else 
+					j++;	
+			}
+		}
+	}
 }
+
+
+//void init()
+//{
+//
+//}
 
 

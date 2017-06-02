@@ -26,3 +26,5 @@ extern int game_time;
 
 enum GAME_STAT{INIT, PLAY, DIE};
 
+extern GAME_STAT game_stat;
+

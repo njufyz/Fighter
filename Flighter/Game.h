@@ -23,7 +23,8 @@ class Game
 	void generateEMBullet();
 	void generateEMplane();
 
-	void collidewithmyplane();
+	void collide_with_myplane();
+	void collide_with_enemy();
 
 public:
 	Game();
