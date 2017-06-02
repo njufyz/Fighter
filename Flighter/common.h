@@ -22,9 +22,8 @@ class MyPlane;
 class Enemy;
 class Bullet;
 
+enum GAME_STAT { INIT, PLAY, DIE };
+
 extern int game_time;
-
-enum GAME_STAT{INIT, PLAY, DIE};
-
 extern GAME_STAT game_stat;
-
+extern char ori_screen[ScreenHeight][ScreenWidth];

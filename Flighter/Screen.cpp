@@ -1,8 +1,8 @@
 #include"Screen.h"
 #include"Plane.h"
+#include"common.h"
 #include<stdio.h>
 #include<Windows.h>
-#include<assert.h>
 
 inline bool isInScr(int x, int y)
 {
@@ -11,8 +11,8 @@ inline bool isInScr(int x, int y)
 
 Screen::Screen()
 {
-	memset(screen, ' ', ScreenHeight * ScreenWidth);
-
+	//memset(screen, ' ', ScreenHeight * ScreenWidth);
+	memcpy(screen, ori_screen, ScreenHeight * ScreenWidth);
 	hOut = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO CursorInfo;
 	GetConsoleCursorInfo(hOut, &CursorInfo);	//获取控制台光标信息  
@@ -25,6 +25,9 @@ void Screen::clear()
 {
 	system("cls");
 	memset(screen, ' ', ScreenHeight * ScreenWidth);
+	//memcpy(screen, ori_screen, ScreenHeight * ScreenWidth);
+	for (int i = 0; i < ScreenHeight; i++)
+		screen[i][BattleWidth] = '|';
 }
 
 void Screen::render()

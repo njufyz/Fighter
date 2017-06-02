@@ -43,6 +43,7 @@ public:
 	friend class Screen;
 	friend class Bullet;
 
+	friend void init();
 };
 
 extern Game game;

@@ -207,9 +207,11 @@ void Game::enemy_collide_with_myplane()
 }
 
 
-//void init()
-//{
-//
-//}
+void init()
+{
+	memset(ori_screen, ' ', ScreenHeight * ScreenWidth);
+	for (int i = 0; i < ScreenHeight; i++)
+		ori_screen[i][BattleWidth] = '|';
+}
 
 
