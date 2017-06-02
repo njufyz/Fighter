@@ -26,6 +26,9 @@ class Game
 	void collide_with_myplane();
 	void collide_with_enemy();
 
+	int scores;
+	int miss;
+
 public:
 	Game();
 	~Game();
@@ -33,6 +36,7 @@ public:
 	void Render();
 	void Clear();
 	void Update();
+	void WriteScores();
 	
 	friend class Enemy;
 	friend class MyPlane;

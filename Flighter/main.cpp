@@ -18,18 +18,20 @@ int main()
 	while (1)
 	{
 		switch (game_stat) {
+
 			case  PLAY:
 				game.Clear();
 				game.Update();
 				game.Render();
-				Sleep(60);
 				game_time++;
 				break;
+
 			case DIE:
 				system("cls");
+				game.WriteScores();
 				break;
 		}
-		
+		Sleep(60);
 	}
 	
 }

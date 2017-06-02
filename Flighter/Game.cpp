@@ -1,4 +1,5 @@
-#include"Windows.h"
+#include<Windows.h>
+#include<iostream>
 #include "Game.h"
 #include"MyPlane.h"
 #include"Enemy.h"
@@ -24,6 +25,7 @@ void Game::updatenemy()
 		if ((*i)->isout())					//飞出去了
 		{
 			enemy.erase(i++);
+			miss++;
 		}
 		else i++;
 	}
@@ -40,6 +42,9 @@ void Game::render()
 
 Game::Game()
 {
+	scores = 0;
+	miss = 0;
+
 	screen = new Screen;
 	myplane = new MyPlane(0.0, 0.0, 5.0);
 	for (int i = 0; i < 5; i++)
@@ -97,6 +102,12 @@ void Game::Update()
 
 }
 
+void Game::WriteScores()
+{
+	std::cout << scores << endl;
+	std::cout << miss << endl;
+}
+
 //添加我方子弹
 void Game::generateMYBullet()
 {
@@ -113,14 +124,16 @@ void Game::generateEMBullet()
 	}
 }
 
-//产生地方飞机
+//产生敌方飞机
 void Game::generateEMplane()
 {
 	if (game_time % 25 == 0)
 		//某一部分随机产生飞机，可能位于屏幕上方
-		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 1.0));
+		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 2.0));
 }
 
+
+//敌机子弹与我方飞机碰撞
 void Game::collide_with_myplane()
 {
 	for (auto i : bullet)
@@ -137,9 +150,10 @@ void Game::collide_with_myplane()
 				|| (x == posx) && (y == posy)
 				|| (x == posx) && (y == posy + 1))
 
-				myplane->HP--;
+				myplane->HP--;				//血量减少
+
 			if (myplane->HP <= 0)
-				game_stat = DIE;
+				game_stat = DIE;				//DIE
 		}
 	}
 }
@@ -162,8 +176,12 @@ void Game::collide_with_enemy()
 					|| (x == posx) && (y == posy)
 					|| (x == posx) && (y == posy + 1))
 
-					enemy.erase(j++);
-				
+				{
+					(*j)->HP -=0.5;
+					if ((*j)->HP <=0)
+						enemy.erase(j++);						//飞机死掉
+					scores += 25;
+				}
 				else 
 					j++;	
 			}
