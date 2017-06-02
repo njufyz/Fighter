@@ -25,7 +25,7 @@ class Game
 
 	void collide_with_myplane();
 	void collide_with_enemy();
-
+	void enemy_collide_with_myplane();
 	int scores;
 	int miss;
 

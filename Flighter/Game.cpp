@@ -50,7 +50,7 @@ Game::Game()
 	for (int i = 0; i < 5; i++)
 	{
 		//先产生5架敌机
-		enemy.push_back(new Enemy(0.0, rand()%80, 2.0, 1.0));
+		enemy.push_back(new Enemy(0.0, rand()% BattleWidth, 2.0, 1.0));
 	}
 
 }
@@ -91,11 +91,12 @@ void Game::Update()
 		generateMYBullet();
 
 	//所有的敌机发射子弹
-	generateEMBullet();
+	//generateEMBullet();
 
-	//TODO: 碰撞检测 & 敌机更新
+	//碰撞检测
 	collide_with_myplane();
 	collide_with_enemy();
+	enemy_collide_with_myplane();
 
 	//显示战场
 	render();
@@ -128,8 +129,8 @@ void Game::generateEMBullet()
 void Game::generateEMplane()
 {
 	if (game_time % 25 == 0)
-		//某一部分随机产生飞机，可能位于屏幕上方
-		enemy.push_back(new Enemy(rand()%10 - 10, rand() % 80, 3.0, 2.0));
+		//随机产生飞机，位于屏幕上方，从上向下飞向战场
+		enemy.push_back(new Enemy(rand()%10 - 10, rand() % BattleWidth, 3.0, 2.0));
 }
 
 
@@ -186,6 +187,22 @@ void Game::collide_with_enemy()
 					j++;	
 			}
 		}
+	}
+}
+
+//敌机与我方飞机相撞
+void Game::enemy_collide_with_myplane()
+{
+	int posx = myplane->PosX, posy = myplane->PosY;
+	for (auto i : enemy)
+	{
+		int x = i->PosX, y = i->PosY;
+		if ((x == posx - 2 && y == posy - 2)
+			|| (x == posx - 2 && y == posy - 1)
+			|| (x == posx - 2 && y == posy)
+			|| (x == posx - 2 && y == posy + 1)
+			|| (x == posx - 2 && y == posy + 2))
+			game_stat = DIE;
 	}
 }
 
