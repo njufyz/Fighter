@@ -1,6 +1,7 @@
 #pragma once
 
 #include<list>
+#include<memory>
 #include"Plane.h"
 #include"Screen.h"
 #include"Bullet.h"
@@ -10,8 +11,8 @@ using namespace std;
 class Game
 {
 	MyPlane* myplane;
-	list<Enemy*>enemy;
-	list<Bullet*> bullet;
+	list<shared_ptr<Enemy>>enemy;
+	list<shared_ptr<Bullet>> bullet;
 	Screen* screen;
 
 	void updatebullet();

@@ -6,7 +6,7 @@ class Screen
 {
 	char screen[ScreenHeight][ScreenWidth];
 	HANDLE hOut;
-
+	
 public:
 	Screen();
 	void clear();

@@ -1,5 +1,6 @@
 #include<Windows.h>
 #include<iostream>
+#include<memory>
 #include "Game.h"
 #include"MyPlane.h"
 #include"Enemy.h"
@@ -50,7 +51,8 @@ Game::Game()
 	for (int i = 0; i < 5; i++)
 	{
 		//先产生5架敌机
-		enemy.push_back(new Enemy(0.0, rand()% BattleWidth, 1.0, 1.0));
+		shared_ptr<Enemy> ptr (new Enemy(0.0, rand() % BattleWidth, 1.0, 1.0));
+		enemy.push_back(ptr);
 	}
 
 }
@@ -91,7 +93,7 @@ void Game::Update()
 		generateMYBullet();
 
 	//所有的敌机发射子弹
-	//generateEMBullet();
+	generateEMBullet();
 
 	//碰撞检测
 	collide_with_myplane();
@@ -112,7 +114,8 @@ void Game::WriteScores()
 //添加我方子弹
 void Game::generateMYBullet()
 {
-	bullet.push_back(new Bullet(myplane->PosX - planeSizeX , myplane->PosY, ME));
+	shared_ptr<Bullet> ptr(new Bullet(myplane->PosX - planeSizeX, myplane->PosY, ME));
+	bullet.push_back(ptr);
 }
 
 //添加敌机子弹
@@ -121,7 +124,10 @@ void Game::generateEMBullet()
 	if (game_time % 5 == 0)
 	{
 		for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
-			bullet.push_back(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
+		{
+			shared_ptr<Bullet> ptr(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
+			bullet.push_back(ptr);
+		}
 	}
 }
 
@@ -130,7 +136,10 @@ void Game::generateEMplane()
 {
 	if (game_time % 25 == 0)
 		//随机产生飞机，位于屏幕上方，从上向下飞向战场
-		enemy.push_back(new Enemy(rand()%10 - 10, rand() % BattleWidth, 1.0, 2.0));
+	{
+		shared_ptr<Enemy> ptr(new Enemy(rand() % 10 - 10, rand() % BattleWidth, 1.0, 2.0));
+		enemy.push_back(ptr);
+	}
 }
 
 

@@ -31,6 +31,8 @@ int main()
 			case DIE:
 				system("cls");
 				game.WriteScores();
+				Sleep(1000);
+				//game_stat = PLAY;
 				break;
 		}
 		Sleep(60);
