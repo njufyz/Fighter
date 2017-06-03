@@ -17,14 +17,24 @@ void MyPlane::render()
 	int y = (int)PosY;
 
 	//TODO:
-	game.screen->writechar('=', x, y);
-	game.screen->writechar('|', x - 1, y);
+	CHAR_INFO c[5];
+	for (int i = 0; i<5; i++)
+		c[i].Attributes = FOREGROUND_RED | 0;
 
-	game.screen->writechar('<', x, y + 1);
-	game.screen->writechar('$', x - 1, y + 1);
+	c[0].Char.UnicodeChar = '=';
+	c[1].Char.UnicodeChar = '|';
+	c[2].Char.UnicodeChar = '<';
+	c[3].Char.UnicodeChar = '$';
+	c[4].Char.UnicodeChar = '>';
 
-	game.screen->writechar('>', x, y - 1);
-	game.screen->writechar('$', x - 1, y - 1);
+	game.screen->writechar(c[0], x, y);
+	game.screen->writechar(c[1], x - 1, y);
+
+	game.screen->writechar(c[2], x, y + 1);
+	game.screen->writechar(c[3], x - 1, y + 1);
+
+	game.screen->writechar(c[4], x, y - 1);
+	game.screen->writechar(c[3], x - 1, y - 1);
 	
 }
 void MyPlane::setPos()

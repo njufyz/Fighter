@@ -34,11 +34,17 @@ void Enemy::render()
 	int x = (int)PosX;
 	int y = (int)PosY;
 
-	game.screen->writechar('#', x, y);
-	game.screen->writechar('$', x + 1, y);
+	CHAR_INFO c[2];
+	for (int i = 0; i<2; i++)
+		c[i].Attributes = FOREGROUND_INTENSITY | 0;
+	c[0].Char.UnicodeChar = '#';
+	c[1].Char.UnicodeChar = '$';
 
-	game.screen->writechar('#', x, y + 1);
+	game.screen->writechar(c[0], x, y);
+	game.screen->writechar(c[1], x + 1, y);
+
+	game.screen->writechar(c[0], x, y + 1);
 	
-	game.screen->writechar('#', x, y - 1);
+	game.screen->writechar(c[0], x, y - 1);
 	
 }

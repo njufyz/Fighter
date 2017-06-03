@@ -8,10 +8,17 @@ void Bullet::render()
 	if (enable)
 	{
 		//子弹样式不一样
+		CHAR_INFO c[2];
+		
+		c[0].Attributes = FOREGROUND_RED | 0;
+		c[1].Attributes = FOREGROUND_INTENSITY | 0;
+		c[0].Char.UnicodeChar = '*';
+		c[1].Char.UnicodeChar = '.';
+
 		if(type == ME)
-			game.screen->writechar('*', (int)x, (int)y);
+			game.screen->writechar(c[0], (int)x, (int)y);
 		else
-			game.screen->writechar('.', (int)x, (int)y);
+			game.screen->writechar(c[1], (int)x, (int)y);
 	}
 }
 

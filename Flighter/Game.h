@@ -14,9 +14,12 @@ class Game
 	list<shared_ptr<Enemy>>enemy;
 	list<shared_ptr<Bullet>> bullet;
 	Screen* screen;
+	int scores;
+	int miss;
 
 	void updatebullet();
 	void updatenemy();
+	void updateboard();
 
 	void render();
 
@@ -27,8 +30,7 @@ class Game
 	void collide_with_myplane();
 	void collide_with_enemy();
 	void enemy_collide_with_myplane();
-	int scores;
-	int miss;
+	
 
 public:
 	Game();
@@ -44,7 +46,7 @@ public:
 	friend class Screen;
 	friend class Bullet;
 
-	friend void init();
+	//friend void init();
 	friend void over();
 };
 

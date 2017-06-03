@@ -33,6 +33,10 @@ void Game::updatenemy()
 	}
 }
 
+void Game::updateboard()
+{
+}
+
 void Game::render()
 {
 	myplane->render();					//»­ÎÒ·½·É»ú
