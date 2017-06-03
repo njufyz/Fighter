@@ -1,10 +1,10 @@
 #include"common.h"
 #include<iostream>
-#include<conio.h>
+#include<string>
 #include<Windows.h>
 using namespace std;
 
-
+void displaymessage();
 void SetPos(int i, int j)// set cursor
 {
 	COORD pos = { i, j };
@@ -121,5 +121,55 @@ int drawMenu()
 			}
 			
 		}
+	displaymessage();
 	return 0;
+}
+
+void displaymessage()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED|FOREGROUND_INTENSITY);
+	string message[6] = {
+		"-----: Captain£¡ Enemies ahead!",
+		"-----: Don't worry. ",
+		"       We will destroy them.",
+		"       Savvy?",
+		"-----: Aye!",
+		"Press Enter to fight!"
+	};
+	SetPos(22, 25);
+	cout << message[0];
+	Sleep(1000);
+
+	SetPos(22, 27);
+	cout << message[1];
+	Sleep(500);
+
+	SetPos(22, 28);
+	cout << message[2];
+	Sleep(500);
+
+	SetPos(22, 29);
+	cout << message[3];
+	Sleep(1000);
+
+	SetPos(22, 31);
+	cout << message[4];
+	Sleep(1000);
+
+	SetPos(22, 33);
+	cout << message[5];
+	
+	while (!KEYDOWN(VK_RETURN));
+	/*{
+		SetPos(22, 33);
+		cout << "                            ";
+		Sleep(1000);
+		SetPos(22, 33);
+		cout << message[5];
+	
+	}*/
+	
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),  FOREGROUND_INTENSITY);
+	return;
+	
 }

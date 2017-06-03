@@ -19,7 +19,7 @@ void MyPlane::render()
 	//TODO:
 	CHAR_INFO c[5];
 	for (int i = 0; i<5; i++)
-		c[i].Attributes = FOREGROUND_RED | 0;
+		c[i].Attributes = FOREGROUND_RED  |FOREGROUND_INTENSITY;
 
 	c[0].Char.UnicodeChar = '=';
 	c[1].Char.UnicodeChar = '|';

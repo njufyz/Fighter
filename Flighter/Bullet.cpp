@@ -10,7 +10,7 @@ void Bullet::render()
 		//子弹样式不一样
 		CHAR_INFO c[2];
 		
-		c[0].Attributes = FOREGROUND_RED | 0;
+		c[0].Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
 		c[1].Attributes = FOREGROUND_INTENSITY | 0;
 		c[0].Char.UnicodeChar = '*';
 		c[1].Char.UnicodeChar = '.';

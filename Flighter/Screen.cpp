@@ -67,7 +67,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 		"Level:"
 	};
 	CHAR_INFO c;
-	c.Attributes = FOREGROUND_GREEN | 0;
+	c.Attributes = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 	int i = 0;
 
 	ss << scores;
@@ -101,7 +101,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	i++;
 	for (int j = 0; j < str[i].size(); j++)
 	{
-		c.Attributes = FOREGROUND_RED;
+		c.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
 		c.Char.UnicodeChar = str[i][j];
 		screen[i + 8][81 + j] = c;
 	}
@@ -110,7 +110,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	//good locl
 	for (int j = 0; j < str[i].size(); j++)
 	{
-		c.Attributes = FOREGROUND_RED;
+		c.Attributes = FOREGROUND_RED | FOREGROUND_INTENSITY;
 		c.Char.UnicodeChar = str[i][j];
 		screen[i + 9][81 + j] = c;
 	}
@@ -139,13 +139,13 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	}
 
 	//c.Char.UnicodeChar = '¡ö';
-	c.Attributes = FOREGROUND_GREEN | COMMON_LVB_GRID_HORIZONTAL| COMMON_LVB_UNDERSCORE;
+	c.Attributes = FOREGROUND_GREEN | COMMON_LVB_GRID_HORIZONTAL| COMMON_LVB_UNDERSCORE | FOREGROUND_INTENSITY;
 	//c.Attributes= FOREGROUND_INTENSITY;
 	for (int j = 0; j < 10; j++)
 	{
 
 		if (hp <= 3)
-			c.Attributes = FOREGROUND_RED | COMMON_LVB_GRID_HORIZONTAL | COMMON_LVB_UNDERSCORE;
+			c.Attributes = FOREGROUND_RED | COMMON_LVB_GRID_HORIZONTAL | COMMON_LVB_UNDERSCORE | FOREGROUND_INTENSITY;
 	
 		if (j == 0)
 			c.Attributes |= COMMON_LVB_GRID_LVERTICAL;
@@ -162,7 +162,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	}
 
 	//miss
-	c.Attributes = FOREGROUND_INTENSITY | 0;
+	c.Attributes = FOREGROUND_INTENSITY   |FOREGROUND_INTENSITY;
 	i++;
 	for (int j = 0; j < str[i].size(); j++)
 	{
@@ -189,7 +189,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	{
 		for (int j = 0; j < level[0].size(); j++)
 		{
-			c.Attributes = FOREGROUND_RED;
+			c.Attributes = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
 			c.Char.UnicodeChar = level[0][j];
 			screen[i + 22][89 + j] = c;
 		}
@@ -198,7 +198,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	{
 		for (int j = 0; j < level[1].size(); j++)
 		{
-			c.Attributes = FOREGROUND_GREEN;
+			c.Attributes = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
 			c.Char.UnicodeChar = level[1][j];
 			screen[i + 22][89 + j] = c;
 		}
