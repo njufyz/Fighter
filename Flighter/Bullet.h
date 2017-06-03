@@ -13,7 +13,7 @@ public:
 		x = _x;
 		y = _y;
 		type = _type;
-		velocity = type * 2.0f;
+		velocity = type * 1.0f;
 		enable = 1;
 	}
 
