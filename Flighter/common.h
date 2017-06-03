@@ -29,5 +29,8 @@ enum GAME_STAT { INIT, PLAY, DIE, REPLAY };
 extern int game_time;
 extern GAME_STAT game_stat;
 extern int sleep_time;
+extern int bullet_freq;
+extern int enemy_freq;
+
 
 int drawMenu();

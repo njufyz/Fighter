@@ -15,19 +15,19 @@ int main()
 	
 	game_stat = INIT;
 	srand(time(0));
-//	drawMenu();
+	drawMenu();
 
 	while (1)
 	{
 		switch (game_stat) {
 
 			case INIT:
-				
 				system("MODE con: COLS=120 LINES=40");
 				game.Init();
 				break;
 
 			case  PLAY:
+			
 				game.Clear();
 				game.Update();
 				game.Render();
@@ -45,7 +45,9 @@ int main()
 
 			case REPLAY:
 				game.Replay();
-				break;
+				drawMenu();
+				system("MODE con: COLS=120 LINES=40");
+				//break;
 		}
 		
 	}

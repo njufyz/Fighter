@@ -38,6 +38,8 @@ void drawCol(int x, int y1, int y2, char ch)
 
 int drawMenu()
 {
+	system("cls");
+	system("MODE con: COLS=80 LINES=40");
 	SetConsoleTitle(TEXT("SpaceWar"));
 	HideCursor();
 	SetPos(30, 1);
@@ -46,29 +48,30 @@ int drawMenu()
 	drawRow(7, 0, 79, '=');
 
 	SetPos(28, 5);
-	cout << "w 和 s 选择， k 确定";
+	cout << "↑ 和 ↓ 选择， Enter 确定";
 	SetPos(25, 11);
-	cout << "1. 简单的敌人";
+	cout << "1. 简单模式";
 	SetPos(25, 13);
-	cout << "2. 冷酷的敌人";
+	cout << "2. 冷酷模式";
 	drawRow(20, 0, 79, '-');
 	drawRow(22, 0, 79, '-');
 	
 	SetPos(25, 18);
-	cout << "简单的敌人：";
+	cout << "简单模式：";
 	SetPos(38, 18);
-	cout << "移动速度较慢";
+	cout << "敌机移动速度较慢";
 	
 	int j = 11;
 	SetPos(22, j);
 	cout << ">>";
-
+	int mood = 0;
 	while (1)
 	{
 		if(KEYDOWN(VK_UP))
 		{	
 			if (j == 13)
 				{
+					mood = 0;
 					SetPos(22, j);
 					cout << "　";
 					j = 11;
@@ -76,9 +79,9 @@ int drawMenu()
 					cout << ">>";
 			
 					SetPos(25, 18);
-					cout << "简单的敌人：";
+					cout << "简单模式：";
 					SetPos(38, 18);
-					cout << "移动速度较慢";
+					cout << "敌机移动速度较慢";
 				}
 		continue;
 		}
@@ -86,6 +89,7 @@ int drawMenu()
 			{
 				if (j == 11)
 				{
+					mood = 1;
 					SetPos(22, j);
 					cout << "　";
 					j = 13;
@@ -93,17 +97,26 @@ int drawMenu()
 					cout << ">>";
 				
 					SetPos(25, 18);
-					cout << "冷酷的敌人：";
+					cout << "冷酷模式：";
 					SetPos(38, 18);
-					cout << "移动速度较快";
+					cout << "敌机移动速度较快";
 				}
 				continue;
 			}
 		if(KEYDOWN(VK_RETURN))
 			{
-			if (j == 8)
+			if (mood == 0)
+			{
 				sleep_time = 70;
-			else sleep_time = 35;
+				bullet_freq = 5;
+				enemy_freq = 20;
+			}
+			else 
+			{
+				sleep_time = 40;
+				bullet_freq = 2;
+				enemy_freq = 13;
+			}
 			break;
 			}
 			

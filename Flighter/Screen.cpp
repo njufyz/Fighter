@@ -63,7 +63,8 @@ void Screen::writeboard(int scores, int Miss, float hp)
 		"Good luck, Captain!",
 		"Scores: ",
 		"HP:",
-		"Miss:"
+		"Miss:",
+		"Level:"
 	};
 	CHAR_INFO c;
 	c.Attributes = FOREGROUND_GREEN | 0;
@@ -173,6 +174,36 @@ void Screen::writeboard(int scores, int Miss, float hp)
 		c.Char.UnicodeChar = miss[j];
 		screen[i + 21][89 + j] = c;
 	}
+
+	//level
+	i++;
+	for (int j = 0; j < str[i].size(); j++)
+	{
+		c.Char.UnicodeChar = str[i][j];
+		screen[i+22][81 + j] = c;
+	}
+	string level[2] = {
+		"Elite",
+		"Easy" };
+	if (sleep_time != 70)
+	{
+		for (int j = 0; j < level[0].size(); j++)
+		{
+			c.Attributes = FOREGROUND_RED;
+			c.Char.UnicodeChar = level[0][j];
+			screen[i + 22][89 + j] = c;
+		}
+	}
+	else
+	{
+		for (int j = 0; j < level[1].size(); j++)
+		{
+			c.Attributes = FOREGROUND_GREEN;
+			c.Char.UnicodeChar = level[1][j];
+			screen[i + 22][89 + j] = c;
+		}
+	}
+
 }
 
 bool Screen::messagebox()
