@@ -113,20 +113,20 @@ void Screen::writeboard(int scores, int Miss, float hp)
 		c.Char.UnicodeChar = str[i][j];
 		screen[i + 9][81 + j] = c;
 	}
-
+	
 	c.Attributes = FOREGROUND_INTENSITY;
 	//score
 	i++;
 	for (int j = 0; j < score.size(); j++)
 	{
 		c.Char.UnicodeChar = score[j];
-		screen[i+14][89 + j] = c;
+		screen[i+19][89 + j] = c;
 	}
 
 	for (int j = 0; j < str[i].size(); j++)
 	{
 		c.Char.UnicodeChar = str[i][j];
-		screen[i+14][81 + j] = c;
+		screen[i+19][81 + j] = c;
 	}
 
 	//hp
@@ -134,16 +134,30 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	for (int j = 0; j < str[i].size(); j++)
 	{
 		c.Char.UnicodeChar = str[i][j];
-		screen[i + 15][81 + j] = c;
+		screen[i + 20][81 + j] = c;
 	}
-	c.Char.UnicodeChar =  '¡ö';
-	c.Attributes = FOREGROUND_GREEN|FOREGROUND_INTENSITY;
+
+	//c.Char.UnicodeChar = '¡ö';
+	c.Attributes = FOREGROUND_GREEN | COMMON_LVB_GRID_HORIZONTAL| COMMON_LVB_UNDERSCORE;
 	//c.Attributes= FOREGROUND_INTENSITY;
-	for (int j = 0; j < 2 * hp; j++)
+	for (int j = 0; j < 10; j++)
 	{
+
 		if (hp <= 3)
-			c.Attributes = FOREGROUND_RED;
-		screen[i+15][85 + j] = c;
+			c.Attributes = FOREGROUND_RED | COMMON_LVB_GRID_HORIZONTAL | COMMON_LVB_UNDERSCORE;
+	
+		if (j == 0)
+			c.Attributes |= COMMON_LVB_GRID_LVERTICAL;
+		else c.Attributes &= 0xf4ff;
+
+		if(j < 2 * hp)
+			c.Char.UnicodeChar = '#';   //¡ö
+		else c.Char.UnicodeChar = ' ';
+
+		if (j == 9)
+			c.Attributes |= COMMON_LVB_GRID_RVERTICAL;
+		
+		screen[i+20][85 +  j] = c;
 	}
 
 	//miss
@@ -152,13 +166,22 @@ void Screen::writeboard(int scores, int Miss, float hp)
 	for (int j = 0; j < str[i].size(); j++)
 	{
 		c.Char.UnicodeChar = str[i][j];
-		screen[i + 16][81 + j] = c;
+		screen[i + 21][81 + j] = c;
 	}
 	for (int j = 0; j < miss.size(); j++)
 	{
 		c.Char.UnicodeChar = miss[j];
-		screen[i + 16][89 + j] = c;
+		screen[i + 21][89 + j] = c;
 	}
+}
+
+bool Screen::messagebox()
+{
+	int id = MessageBox(NULL, TEXT("Your flight are hit!!!"), NULL, MB_ICONWARNING |MB_YESNO);
+	if (id == IDYES)
+		return true;
+	else return false;
+	
 }
 
 
@@ -177,6 +200,9 @@ void Screen::cls()
 	for (int i = 0; i < ScreenHeight; i++)
 		screen[i][BattleWidth] = c;
 
+	c.Char.UnicodeChar = '-';
+	for (int i = 0; i < BoardWidth; i++)
+		screen[19][i+81] = c;
 }
 
 

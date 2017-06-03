@@ -1,10 +1,13 @@
 #include<Windows.h>
-#include<iostream>
+#include<string>
 #include <stdio.h>
 #include<memory>
 #include "Game.h"
 #include"MyPlane.h"
 #include"Enemy.h"
+
+int bullet_freq = 5;
+int enemy_freq = 20;
 
 void Game::updatebullet()
 {
@@ -50,6 +53,17 @@ void Game::render()
 
 Game::Game()
 {
+
+}
+
+Game::~Game()
+{
+	delete myplane;
+	delete screen;
+}
+
+void Game::Init()
+{
 	scores = 0;
 	miss = 0;
 
@@ -58,16 +72,32 @@ Game::Game()
 	for (int i = 0; i < 5; i++)
 	{
 		//先产生5架敌机
-		shared_ptr<Enemy> ptr (new Enemy(0.0, rand() % BattleWidth, 1.0, 1.0));
+		shared_ptr<Enemy> ptr(new Enemy(0.0, rand() % BattleWidth, 1.0, 1.0));
 		enemy.push_back(ptr);
 	}
-
+	game_stat = PLAY;
 }
 
-Game::~Game()
+void Game::Replay()
 {
-	delete myplane;
+	scores = 0;
+	miss = 0;
+
 	delete screen;
+	delete myplane;
+	screen = new Screen;
+	myplane = new MyPlane(0.0, 0.0, 5.0);
+
+	enemy.clear();
+	bullet.clear();
+
+	for (int i = 0; i < 5; i++)
+	{
+		//先产生5架敌机
+		shared_ptr<Enemy> ptr(new Enemy(0.0, rand() % BattleWidth, 1.0, 1.0));
+		enemy.push_back(ptr);
+	}
+	game_stat = PLAY;
 }
 
 //写入屏幕
@@ -115,10 +145,16 @@ void Game::Update()
 
 }
 
-void Game::WriteScores()
+bool Game::Die()
 {
-	std::cout << scores << endl;
-	std::cout << miss << endl;
+	
+	game_stat = REPLAY;
+	return screen->messagebox();
+}
+
+void Game::Cls()
+{
+	screen->cls();
 }
 
 //添加我方子弹
@@ -131,7 +167,7 @@ void Game::generateMYBullet()
 //添加敌机子弹
 void Game::generateEMBullet()
 {
-	if (game_time % 5 == 0)
+	if (game_time % bullet_freq == 0)
 	{
 		for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
 		{
@@ -144,7 +180,7 @@ void Game::generateEMBullet()
 //产生敌方飞机
 void Game::generateEMplane()
 {
-	if (game_time % 25 == 0)
+	if (game_time % enemy_freq == 0)
 		//随机产生飞机，位于屏幕上方，从上向下飞向战场
 	{
 		shared_ptr<Enemy> ptr(new Enemy(rand() % 10 - 10, rand() % BattleWidth, 1.0, 2.0));
@@ -178,6 +214,8 @@ void Game::collide_with_myplane()
 	}
 }
 
+
+//敌方飞机和我方子弹相撞
 void Game::collide_with_enemy()
 {
 	for (auto i : bullet)
@@ -221,23 +259,11 @@ void Game::enemy_collide_with_myplane()
 			|| (x == posx - 2 && y == posy)
 			|| (x == posx - 2 && y == posy + 1)
 			|| (x == posx - 2 && y == posy + 2))
+		{
 			game_stat = DIE;
+			myplane->HP = 0;
+		}
 	}
 }
 
 
-
-
-
-void over()
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
-	printf("                                                        \n");
-	printf("    ■■■      ■      ■      ■■■■      ■■■■   \n");
-	printf("  ■      ■    ■      ■      ■            ■    ■   \n");
-	printf("  ■      ■      ■  ■        ■■■■      ■■■■   \n");
-	printf("  ■      ■      ■  ■        ■            ■■       \n");
-	printf("    ■■■          ■          ■■■■      ■  ■■   \n");
-	printf("                                                         \n");
-	printf("空格键：重来\tEsc：退出");
-}

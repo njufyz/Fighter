@@ -8,17 +8,22 @@
 Game game;
 int game_time= 0;
 GAME_STAT game_stat = INIT;
-
+int sleep_time = 70;
 
 int main()
 {
 	system("MODE con: COLS=120 LINES=40");
 	SetConsoleTitle(TEXT("SpaceWar"));
 	srand(time(0));
-	game_stat = PLAY;
+	game_stat = INIT;
+	
 	while (1)
 	{
 		switch (game_stat) {
+
+			case INIT:
+				game.Init();
+				break;
 
 			case  PLAY:
 				game.Clear();
@@ -29,12 +34,17 @@ int main()
 
 			case DIE:
 				system("cls");
-				game.WriteScores();
-				//game_stat = PLAY;
-				over();
+				game.Render();
+				if (!game.Die())
+					return 0;
+				else 
+					break;
+
+			case REPLAY:
+				game.Replay();
 				break;
 		}
-		Sleep(60);
+		Sleep(sleep_time);
 	}
 	
 }

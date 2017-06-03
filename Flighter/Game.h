@@ -36,11 +36,16 @@ public:
 	Game();
 	~Game();
 
+	void Init();
+	void Replay();
 	void Render();
 	void Clear();
 	void Update();
-	void WriteScores();
+	bool Die();
+	void Cls();
 	
+	
+
 	friend class Enemy;
 	friend class MyPlane;
 	friend class Screen;

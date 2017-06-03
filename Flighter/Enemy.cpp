@@ -1,6 +1,7 @@
 #include "Enemy.h"
 #include"Game.h"
 
+int hard = 1;
 bool Enemy::isout()
 {
 	if (PosX >= ScreenHeight)

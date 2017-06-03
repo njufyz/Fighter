@@ -24,7 +24,7 @@ class MyPlane;
 class Enemy;
 class Bullet;
 
-enum GAME_STAT { INIT, PLAY, DIE };
+enum GAME_STAT { INIT, PLAY, DIE, REPLAY };
 
 extern int game_time;
 extern GAME_STAT game_stat;

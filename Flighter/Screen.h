@@ -13,6 +13,7 @@ public:
 	void render();
 	void writechar(CHAR_INFO c, int x, int y);
 	void writeboard(int scores, int miss, float hp);
+	bool messagebox();
 	void cls();
 
 	friend class Game;
