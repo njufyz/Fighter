@@ -5,6 +5,7 @@
 class Screen
 {
 	char screen[ScreenHeight][ScreenWidth];
+	CHAR_INFO board[ScreenHeight][BoardWidth];
 	HANDLE hOut;
 	
 public:
@@ -12,6 +13,7 @@ public:
 	void clear();
 	void render();
 	void writechar(char c, int x, int y);
+	void writeboard();
 
 	friend class Game;
 	friend class Enemy;

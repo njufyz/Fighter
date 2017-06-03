@@ -45,6 +45,7 @@ public:
 	friend class Bullet;
 
 	friend void init();
+	friend void over();
 };
 
 extern Game game;

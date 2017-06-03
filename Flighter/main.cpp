@@ -8,13 +8,13 @@
 Game game;
 int game_time= 0;
 GAME_STAT game_stat = INIT;
-char ori_screen[ScreenHeight][ScreenWidth];
+
 
 int main()
 {
 	system("MODE con: COLS=120 LINES=40");
 	//system("color af");
-	init();
+	
 	srand(time(0));
 	game_stat = PLAY;
 	while (1)
@@ -31,8 +31,8 @@ int main()
 			case DIE:
 				system("cls");
 				game.WriteScores();
-				Sleep(1000);
 				//game_stat = PLAY;
+				//over();
 				break;
 		}
 		Sleep(60);

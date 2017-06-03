@@ -1,5 +1,6 @@
 #include<Windows.h>
 #include<iostream>
+#include <stdio.h>
 #include<memory>
 #include "Game.h"
 #include"MyPlane.h"
@@ -216,11 +217,18 @@ void Game::enemy_collide_with_myplane()
 }
 
 
-void init()
+
+
+
+void over()
 {
-	memset(ori_screen, ' ', ScreenHeight * ScreenWidth);
-	for (int i = 0; i < ScreenHeight; i++)
-		ori_screen[i][BattleWidth] = '|';
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY | FOREGROUND_RED);
+	printf("                                                        \n");
+	printf("    ■■■      ■      ■      ■■■■      ■■■■   \n");
+	printf("  ■      ■    ■      ■      ■            ■    ■   \n");
+	printf("  ■      ■      ■  ■        ■■■■      ■■■■   \n");
+	printf("  ■      ■      ■  ■        ■            ■■       \n");
+	printf("    ■■■          ■          ■■■■      ■  ■■   \n");
+	printf("                                                         \n");
+	printf("空格键：重来\tEsc：退出");
 }
-
-

@@ -20,6 +20,13 @@ Screen::Screen()
 	GetConsoleCursorInfo(hOut, &CursorInfo);	//获取控制台光标信息  
 	CursorInfo.bVisible = false;								//隐藏控制台光标  
 	SetConsoleCursorInfo(hOut, &CursorInfo);	//设置控制台光标状态
+
+	for(int i =0; i<ScreenHeight;i++)
+		for (int j = 0; j < BoardWidth; j++)
+		{
+			board[i][j].Attributes = FOREGROUND_RED | BACKGROUND_BLUE;
+			board[i][j].Char.UnicodeChar = ' ';
+		}
 }
 
 void Screen::clear()
@@ -28,6 +35,9 @@ void Screen::clear()
 	memset(screen, ' ', ScreenHeight * ScreenWidth);
 	for (int i = 0; i < ScreenHeight; i++)
 		screen[i][BattleWidth] = '|';
+
+	board[20][20].Attributes = FOREGROUND_RED | BACKGROUND_GREEN;
+	board[20][20].Char.UnicodeChar = 'M';
 }
 
 void Screen::render()
@@ -49,19 +59,27 @@ void Screen::render()
 	//}
 	COORD consoleCursor;
 	consoleCursor.X = 0;
+	COORD dwBufferSize = { ScreenHeight, BoardWidth };
+	COORD dwBufferCoord = { 0, 0 };
 	DWORD bytes = 0;
 	for (int i = 0; i<ScreenHeight; i++)
 	{
 		consoleCursor.Y = i;
 		WriteConsoleOutputCharacterA(hOut, screen[i], BattleWidth + 1, consoleCursor, &bytes);
 	}
-	
+	SMALL_RECT rect = { 80, 0,  80+40, 40 };
+	WriteConsoleOutput(hOut, (CHAR_INFO*)board, dwBufferSize, dwBufferCoord, &rect);
 }
 
 void Screen::writechar(char c, int x, int y)
 {
 	if(isInScr(x, y))
 		screen[x][y] = c;
+}
+
+void Screen::writeboard()
+{
+
 }
 
 

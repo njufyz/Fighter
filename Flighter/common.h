@@ -6,6 +6,8 @@
 #define BattleWidth  80
 #define  BattleHeight  40
 
+#define BoardWidth 40
+
 #define planeSizeX 2
 #define planeSizeY 3
 
@@ -26,4 +28,4 @@ enum GAME_STAT { INIT, PLAY, DIE };
 
 extern int game_time;
 extern GAME_STAT game_stat;
-extern char ori_screen[ScreenHeight][ScreenWidth];
+
