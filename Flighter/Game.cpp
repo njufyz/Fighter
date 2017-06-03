@@ -123,6 +123,8 @@ void Game::Update()
 
 	//让所有子弹飞一会
 	updatebullet();
+
+	//让敌机飞一会
 	updatenemy();
 
 	//按下鼠标 我方飞机发射子弹
@@ -161,7 +163,7 @@ void Game::Cls()
 void Game::generateMYBullet()
 {
 	shared_ptr<Bullet> ptr(new Bullet(myplane->PosX - planeSizeX, myplane->PosY, ME));
-	bullet.push_back(ptr);
+	bullet.push_front(ptr);
 }
 
 //添加敌机子弹
@@ -172,7 +174,7 @@ void Game::generateEMBullet()
 		for (auto i = enemy.begin(); i != enemy.end() && (*i)->isin(); i++)
 		{
 			shared_ptr<Bullet> ptr(new Bullet((*i)->PosX + planeSizeX, (*i)->PosY, EM));
-			bullet.push_back(ptr);
+			bullet.push_front(ptr);
 		}
 	}
 }

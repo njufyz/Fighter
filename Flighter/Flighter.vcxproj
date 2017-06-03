@@ -152,6 +152,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu.cpp" />
     <ClCompile Include="MyPlane.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Screen.cpp" />

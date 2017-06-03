@@ -177,7 +177,7 @@ void Screen::writeboard(int scores, int Miss, float hp)
 
 bool Screen::messagebox()
 {
-	int id = MessageBox(NULL, TEXT("Your flight are hit!!!"), NULL, MB_ICONWARNING |MB_YESNO);
+	int id = MessageBox(NULL, TEXT("Your flight was hit!!!\nPlay again, Captain?"), TEXT("SpaceWar"), MB_ICONWARNING |MB_YESNO);
 	if (id == IDYES)
 		return true;
 	else return false;
@@ -201,7 +201,7 @@ void Screen::cls()
 		screen[i][BattleWidth] = c;
 
 	c.Char.UnicodeChar = '-';
-	for (int i = 0; i < BoardWidth; i++)
+	for (int i = 0; i < BoardWidth - 1; i++)
 		screen[19][i+81] = c;
 }
 

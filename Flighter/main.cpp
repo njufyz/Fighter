@@ -12,16 +12,18 @@ int sleep_time = 70;
 
 int main()
 {
-	system("MODE con: COLS=120 LINES=40");
-	SetConsoleTitle(TEXT("SpaceWar"));
-	srand(time(0));
-	game_stat = INIT;
 	
+	game_stat = INIT;
+	srand(time(0));
+//	drawMenu();
+
 	while (1)
 	{
 		switch (game_stat) {
 
 			case INIT:
+				
+				system("MODE con: COLS=120 LINES=40");
 				game.Init();
 				break;
 
@@ -30,6 +32,7 @@ int main()
 				game.Update();
 				game.Render();
 				game_time++;
+				Sleep(sleep_time);
 				break;
 
 			case DIE:
@@ -44,7 +47,7 @@ int main()
 				game.Replay();
 				break;
 		}
-		Sleep(sleep_time);
+		
 	}
 	
 }

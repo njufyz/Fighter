@@ -59,5 +59,8 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="menu.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
