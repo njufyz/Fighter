@@ -35,6 +35,8 @@ void Game::updatenemy()
 
 void Game::updateboard()
 {
+	int score = this->scores;
+	screen->writeboard(score, miss, myplane->HP);
 }
 
 void Game::render()
@@ -104,6 +106,9 @@ void Game::Update()
 	collide_with_myplane();
 	collide_with_enemy();
 	enemy_collide_with_myplane();
+
+	//更新分数
+	updateboard();
 
 	//显示战场
 	render();

@@ -13,8 +13,7 @@ GAME_STAT game_stat = INIT;
 int main()
 {
 	system("MODE con: COLS=120 LINES=40");
-	//system("color af");
-	
+	SetConsoleTitle(TEXT("SpaceWar"));
 	srand(time(0));
 	game_stat = PLAY;
 	while (1)
@@ -32,7 +31,7 @@ int main()
 				system("cls");
 				game.WriteScores();
 				//game_stat = PLAY;
-				//over();
+				over();
 				break;
 		}
 		Sleep(60);
