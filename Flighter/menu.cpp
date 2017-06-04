@@ -40,14 +40,19 @@ int drawMenu()
 {
 	system("cls");
 	system("MODE con: COLS=80 LINES=40");
+	
 	SetConsoleTitle(TEXT("SpaceWar"));
+	
 	HideCursor();
-	SetPos(30, 1);
+	SetPos(34, 1);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 	cout << "Space  War";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
+
 	drawRow(3, 0, 79, '=');
 	drawRow(7, 0, 79, '=');
 
-	SetPos(28, 5);
+	SetPos(25, 5);
 	cout << "↑ 和 ↓ 选择， Enter 确定";
 	SetPos(25, 11);
 	cout << "1. 简单模式";
@@ -56,14 +61,18 @@ int drawMenu()
 	drawRow(20, 0, 79, '-');
 	drawRow(22, 0, 79, '-');
 	
-	SetPos(25, 18);
+	SetPos(20, 18);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 	cout << "简单模式：";
-	SetPos(38, 18);
-	cout << "敌机移动速度较慢";
+	SetPos(30, 18);
+	cout << "敌机移动速度较慢，密度小， 射速慢";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 	
 	int j = 11;
 	SetPos(22, j);
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 	cout << ">>";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 	int mood = 0;
 	while (1)
 	{
@@ -71,6 +80,7 @@ int drawMenu()
 		{	
 			if (j == 13)
 				{
+				SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 					mood = 0;
 					SetPos(22, j);
 					cout << "　";
@@ -78,10 +88,11 @@ int drawMenu()
 					SetPos(22, j);
 					cout << ">>";
 			
-					SetPos(25, 18);
+					SetPos(20, 18);
 					cout << "简单模式：";
-					SetPos(38, 18);
-					cout << "敌机移动速度较慢";
+					SetPos(30, 18);
+					cout << "敌机移动速度较慢,，密度小，射速慢";
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 				}
 		continue;
 		}
@@ -89,6 +100,7 @@ int drawMenu()
 			{
 				if (j == 11)
 				{
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 					mood = 1;
 					SetPos(22, j);
 					cout << "　";
@@ -96,10 +108,11 @@ int drawMenu()
 					SetPos(22, j);
 					cout << ">>";
 				
-					SetPos(25, 18);
+					SetPos(20, 18);
 					cout << "冷酷模式：";
-					SetPos(38, 18);
-					cout << "敌机移动速度较快";
+					SetPos(30, 18);
+					cout << "敌机移动速度较快，密度大， 射速快";
+					SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 				}
 				continue;
 			}
@@ -128,13 +141,14 @@ int drawMenu()
 void displaymessage()
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED|FOREGROUND_INTENSITY);
-	string message[6] = {
+	string message[7] = {
 		"-----: Captain！ Enemies ahead!",
 		"-----: Don't worry. ",
 		"       We will destroy them.",
 		"       Savvy?",
 		"-----: Aye!",
-		"Press Enter to fight!"
+		"Press Enter to fight!",
+		"(鼠标操纵飞机， 左键射击)"
 	};
 	SetPos(22, 25);
 	cout << message[0];
@@ -142,11 +156,11 @@ void displaymessage()
 
 	SetPos(22, 27);
 	cout << message[1];
-	Sleep(500);
+	Sleep(1000);
 
 	SetPos(22, 28);
 	cout << message[2];
-	Sleep(500);
+	Sleep(1000);
 
 	SetPos(22, 29);
 	cout << message[3];
@@ -158,16 +172,15 @@ void displaymessage()
 
 	SetPos(22, 33);
 	cout << message[5];
+
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);
+	SetPos(22, 35);
+	cout << message[6];
+
+	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
 	
+
 	while (!KEYDOWN(VK_RETURN));
-	/*{
-		SetPos(22, 33);
-		cout << "                            ";
-		Sleep(1000);
-		SetPos(22, 33);
-		cout << message[5];
-	
-	}*/
 	
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),  FOREGROUND_INTENSITY);
 	return;
