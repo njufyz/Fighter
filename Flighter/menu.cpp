@@ -5,6 +5,7 @@
 using namespace std;
 
 void displaymessage();
+
 void SetPos(int i, int j)// set cursor
 {
 	COORD pos = { i, j };
@@ -147,8 +148,8 @@ void displaymessage()
 		"       We will destroy them.",
 		"       Savvy?",
 		"-----: Aye!",
-		"Press Enter to fight!",
-		"(鼠标操纵飞机， 左键射击)"
+		"Press Enter to fight!!!",
+		"(鼠标操纵飞机， 左键射击, 关闭快速编辑模式以获得最佳效果)"
 	};
 	SetPos(22, 25);
 	cout << message[0];
@@ -174,11 +175,9 @@ void displaymessage()
 	cout << message[5];
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN | FOREGROUND_INTENSITY);
-	SetPos(22, 35);
+	SetPos(11, 35);
 	cout << message[6];
 
-	//SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_INTENSITY);
-	
 
 	while (!KEYDOWN(VK_RETURN));
 	
